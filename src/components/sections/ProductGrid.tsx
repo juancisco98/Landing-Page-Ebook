@@ -11,7 +11,7 @@ const EBOOKS = [
         description: 'La guía definitiva para traer vehículos de alta gama sin intermediarios.',
         price: '19.99',
         tag: 'LOGÍSTICA',
-        image: '/covers/import_alemania.png',
+        image: '/importar coches.png',
     },
     {
         id: '56859989344631',
@@ -19,7 +19,7 @@ const EBOOKS = [
         description: 'Construye un ecosistema de ingresos pasivos con automatización avanzada.',
         price: '9.99',
         tag: 'IA',
-        image: '/covers/dinero_ia.png',
+        image: '/dinero con IA.png',
     },
     {
         id: '56860006809975',
@@ -27,7 +27,7 @@ const EBOOKS = [
         description: 'Olvida el relleno. Aquí tienes el margen real y la logística que funciona.',
         price: '19.99',
         tag: 'E-COMM',
-        image: '/covers/dropshipping_espanol.png',
+        image: '/dropshipping.png',
     },
     {
         id: '56860009922935',
@@ -35,7 +35,7 @@ const EBOOKS = [
         description: 'Accede a activos inmobiliarios con un 40% de descuento real.',
         price: '11.99',
         tag: 'INVERSIÓN',
-        image: '/covers/subastas_oro.png',
+        image: '/subastas judiciales.jpeg',
     },
     {
         id: '56860012446071',
@@ -43,7 +43,7 @@ const EBOOKS = [
         description: 'Fisiología y control absoluto. La verdad científica sobre el rendimiento.',
         price: '9.99',
         tag: 'MENTALIDAD',
-        image: '/covers/ser_precoz_premium.png',
+        image: '/precoz.png',
     },
 ];
 
