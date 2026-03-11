@@ -173,7 +173,7 @@ export function FloatingEbooks() {
                             initial={{ scale: 0.9, y: 20 }}
                             animate={{ scale: 1, y: 0 }}
                             exit={{ scale: 0.9, y: 20 }}
-                            className="bg-white border border-black/5 shadow-2xl rounded-[40px] max-w-4xl w-full p-5 md:p-12 flex flex-col md:flex-row gap-6 md:gap-12 relative max-h-[85dvh] overflow-y-auto"
+                            className="bg-white border border-black/5 shadow-2xl rounded-[40px] max-w-4xl w-full p-5 md:p-12 flex flex-row gap-5 md:gap-12 relative max-h-[85dvh] overflow-y-auto"
                             onClick={e => e.stopPropagation()}
                         >
                             <button
@@ -183,17 +183,17 @@ export function FloatingEbooks() {
                                 <X className="w-6 h-6" />
                             </button>
 
-                            <div className="w-full md:w-1/3 shrink-0">
+                            <div className="w-2/5 md:w-1/3 shrink-0">
                                 <img
                                     src={selectedEbook.image}
                                     alt={selectedEbook.title}
-                                    className="w-full h-48 md:h-auto md:aspect-[3/4] object-cover rounded-3xl shadow-xl shadow-black/10"
+                                    className="w-full aspect-[3/4] object-cover rounded-2xl md:rounded-3xl shadow-xl shadow-black/10"
                                 />
                             </div>
 
                             <div className="flex-1">
                                 <span className="text-blue-500 font-bold tracking-[0.3em] text-[10px] uppercase mb-4 block italic">Contenido Exclusivo</span>
-                                <h3 className="text-4xl font-black tracking-tighter uppercase mb-6 leading-none">{selectedEbook.title}</h3>
+                                <h3 className="text-xl md:text-4xl font-black tracking-tighter uppercase mb-4 md:mb-6 leading-tight md:leading-none">{selectedEbook.title}</h3>
 
                                 <div className="space-y-8">
                                     <div>

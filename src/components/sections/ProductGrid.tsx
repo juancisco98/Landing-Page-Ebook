@@ -56,7 +56,7 @@ export default function ProductGrid() {
                 <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 md:mb-20 gap-6 md:gap-8">
                     <div>
                         <span className="text-blue-500 font-black tracking-[0.3em] text-[10px] uppercase mb-6 block">Catálogo Exclusivo</span>
-                        <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-black tracking-tighter text-black uppercase leading-[0.9] lg:whitespace-nowrap">
+                        <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-black tracking-tighter text-black uppercase leading-tight md:leading-[0.9] lg:whitespace-nowrap">
                             NUESTRO <span className="text-blue-500 italic">CATÁLOGO</span>
                         </h2>
                     </div>

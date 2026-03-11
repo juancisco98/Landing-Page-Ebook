@@ -31,7 +31,7 @@ export default function FAQ() {
             <div className="container mx-auto px-4 md:px-6 max-w-3xl">
                 <div className="mb-10 md:mb-16 text-center">
                     <span className="text-blue-500 font-black tracking-[0.3em] text-[10px] uppercase mb-6 block">Sin letra pequeña</span>
-                    <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tighter text-black uppercase leading-[0.9]">
+                    <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tighter text-black uppercase leading-tight md:leading-[0.9]">
                         LO QUE SIEMPRE <span className="text-blue-500 italic">PREGUNTAN</span>
                     </h2>
                 </div>
