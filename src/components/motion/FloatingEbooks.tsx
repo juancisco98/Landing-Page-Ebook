@@ -167,7 +167,7 @@ export function FloatingEbooks() {
                             initial={{ scale: 0.9, y: 20 }}
                             animate={{ scale: 1, y: 0 }}
                             exit={{ scale: 0.9, y: 20 }}
-                            className="bg-white border border-black/5 shadow-2xl rounded-[40px] max-w-4xl w-full p-8 md:p-12 flex flex-col md:flex-row gap-12 relative"
+                            className="bg-white border border-black/5 shadow-2xl rounded-[40px] max-w-4xl w-full p-5 md:p-12 flex flex-col md:flex-row gap-6 md:gap-12 relative max-h-[85dvh] overflow-y-auto"
                             onClick={e => e.stopPropagation()}
                         >
                             <button
@@ -181,7 +181,7 @@ export function FloatingEbooks() {
                                 <img
                                     src={selectedEbook.image}
                                     alt={selectedEbook.title}
-                                    className="w-full aspect-[3/4] object-cover rounded-3xl shadow-xl shadow-black/10"
+                                    className="w-full h-48 md:h-auto md:aspect-[3/4] object-cover rounded-3xl shadow-xl shadow-black/10"
                                 />
                             </div>
 
