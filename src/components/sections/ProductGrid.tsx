@@ -114,7 +114,7 @@ export default function ProductGrid() {
 
                                 {/* Always-visible CTA for mobile */}
                                 <button
-                                    onClick={() => addItem(ebook.id, 1)}
+                                    onClick={() => addItem(ebook.id, 1, { title: ebook.title, price: ebook.price, image: ebook.image })}
                                     className="md:hidden w-full flex items-center justify-center gap-2 bg-black text-white rounded-2xl px-6 py-3 font-black text-[10px] tracking-widest uppercase mb-4"
                                 >
                                     <ShoppingCart className="w-4 h-4" />
@@ -122,7 +122,7 @@ export default function ProductGrid() {
                                 </button>
 
                                 <button
-                                    onClick={() => addItem(ebook.id, 1)}
+                                    onClick={() => addItem(ebook.id, 1, { title: ebook.title, price: ebook.price, image: ebook.image })}
                                     className="flex items-center gap-2 text-[10px] font-black tracking-widest uppercase text-blue-500 group/link"
                                 >
                                     Añadir al Carrito

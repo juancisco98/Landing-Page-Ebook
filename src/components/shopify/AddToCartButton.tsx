@@ -2,11 +2,18 @@
 
 import { useCart } from '@/hooks/useCart';
 
-export function AddToCartButton({ variantId }: { variantId: string }) {
-    const { addItem, isOpen, setIsOpen } = useCart();
+interface AddToCartButtonProps {
+    variantId: string;
+    title: string;
+    price: string;
+    image?: string;
+}
+
+export function AddToCartButton({ variantId, title, price, image }: AddToCartButtonProps) {
+    const { addItem, setIsOpen } = useCart();
 
     const handleAdd = async () => {
-        await addItem(variantId, 1);
+        await addItem(variantId, 1, { title, price, image });
         setIsOpen(true);
     };
 
