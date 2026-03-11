@@ -121,7 +121,7 @@ export function FloatingEbooks() {
                     <motion.div
                         key={item.id}
                         className="absolute cursor-pointer"
-                        style={{ zIndex: 10 + index, willChange: 'transform' }}
+                        style={{ zIndex: 10 + index, willChange: 'transform', touchAction: 'pan-y' }}
                         initial={{ x: item.baseX, y: 0, rotate: 0, opacity: 0 }}
                         animate={{ x: item.xPath, y: item.yPath, rotate: item.rotatePath, opacity: 1 }}
                         transition={{
