@@ -121,7 +121,7 @@ export function FloatingEbooks() {
                     <motion.div
                         key={item.id}
                         className="absolute cursor-pointer"
-                        style={{ zIndex: 10 + index, willChange: 'transform', touchAction: 'pan-y' }}
+                        style={{ zIndex: 10 + index, willChange: 'transform', touchAction: 'manipulation' }}
                         initial={{ x: item.baseX, y: 0, rotate: 0, opacity: 0 }}
                         animate={{ x: item.xPath, y: item.yPath, rotate: item.rotatePath, opacity: 1 }}
                         transition={{
@@ -131,29 +131,19 @@ export function FloatingEbooks() {
                             ease: "easeInOut",
                             opacity: { duration: 1 }
                         }}
-                        whileHover={{
-                            scale: 1.15,
-                            rotate: 0,
-                            zIndex: 100,
-                            transition: { type: "spring", stiffness: 300, damping: 20 }
-                        }}
                         onClick={() => setSelectedId(item.id)}
                     >
                         <div className="relative group">
                             <img
                                 src={item.image}
                                 alt={item.title}
-                                className="w-28 h-40 sm:w-36 sm:h-48 md:w-44 md:h-60 lg:w-56 lg:h-72 object-cover rounded-[24px] shadow-[0_30px_60px_-15px_rgba(0,0,0,0.3)] border border-white/20 backdrop-blur-sm transition-shadow duration-500 group-hover:shadow-[0_40px_80px_-15px_rgba(59,130,246,0.3)]"
+                                className="w-28 h-40 sm:w-36 sm:h-48 md:w-44 md:h-60 lg:w-56 lg:h-72 object-cover rounded-[24px] shadow-[0_30px_60px_-15px_rgba(0,0,0,0.3)] border border-white/20 backdrop-blur-sm transition-all duration-500 group-hover:scale-110 group-hover:shadow-[0_40px_80px_-15px_rgba(59,130,246,0.3)]"
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-blue-600/40 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 rounded-[24px] flex flex-col items-center justify-end pb-8">
-                                <motion.div
-                                    initial={{ y: 10, opacity: 0 }}
-                                    whileHover={{ y: 0, opacity: 1 }}
-                                    className="flex flex-col items-center gap-2"
-                                >
+                                <div className="flex flex-col items-center gap-2 translate-y-2 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-300">
                                     <BookOpen className="text-white w-8 h-8" />
                                     <span className="text-white text-[10px] font-black tracking-widest uppercase">Leer Más</span>
-                                </motion.div>
+                                </div>
                             </div>
                         </div>
                     </motion.div>
@@ -166,70 +156,139 @@ export function FloatingEbooks() {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        className="fixed inset-0 z-[100] flex items-center justify-center p-6 bg-white/80 backdrop-blur-xl"
+                        className="fixed inset-0 z-[100] flex items-end md:items-center justify-center md:p-6 bg-black/40 backdrop-blur-sm"
                         onClick={() => setSelectedId(null)}
                     >
                         <motion.div
-                            initial={{ scale: 0.9, y: 20 }}
-                            animate={{ scale: 1, y: 0 }}
-                            exit={{ scale: 0.9, y: 20 }}
-                            className="bg-white border border-black/5 shadow-2xl rounded-[40px] max-w-4xl w-full p-5 md:p-12 flex flex-row gap-5 md:gap-12 relative max-h-[85dvh] overflow-y-auto"
+                            initial={{ y: '100%', opacity: 0 }}
+                            animate={{ y: 0, opacity: 1 }}
+                            exit={{ y: '100%', opacity: 0 }}
+                            transition={{ type: 'spring', damping: 30, stiffness: 300 }}
+                            className="bg-white w-full md:max-w-4xl md:rounded-[40px] rounded-t-[32px] flex flex-col max-h-[88dvh] md:max-h-[85dvh] overflow-hidden shadow-2xl"
                             onClick={e => e.stopPropagation()}
                         >
-                            <button
-                                onClick={() => setSelectedId(null)}
-                                className="absolute top-8 right-8 p-2 hover:bg-black/5 rounded-full transition-all"
-                            >
-                                <X className="w-6 h-6" />
-                            </button>
-
-                            <div className="w-2/5 md:w-1/3 shrink-0">
+                            {/* Mobile: cover image at top with overlay */}
+                            <div className="relative h-52 shrink-0 md:hidden">
                                 <img
                                     src={selectedEbook.image}
                                     alt={selectedEbook.title}
-                                    className="w-full aspect-[3/4] object-cover rounded-2xl md:rounded-3xl shadow-xl shadow-black/10"
+                                    className="w-full h-full object-cover"
                                 />
+                                <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/60" />
+                                <button
+                                    onClick={() => setSelectedId(null)}
+                                    className="absolute top-4 right-4 w-8 h-8 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center"
+                                >
+                                    <X className="w-4 h-4 text-white" />
+                                </button>
+                                <div className="absolute bottom-4 left-4">
+                                    <span className="px-3 py-1 bg-white/20 backdrop-blur-md border border-white/30 text-white text-[10px] font-black tracking-widest uppercase rounded-full">
+                                        {selectedEbook.tag}
+                                    </span>
+                                </div>
+                                <div className="absolute bottom-4 right-4">
+                                    <span className="text-white font-black text-lg drop-shadow-lg">€{selectedEbook.price}</span>
+                                </div>
                             </div>
 
-                            <div className="flex-1">
-                                <span className="text-blue-500 font-bold tracking-[0.3em] text-[10px] uppercase mb-4 block italic">Contenido Exclusivo</span>
-                                <h3 className="text-xl md:text-4xl font-black tracking-tighter uppercase mb-4 md:mb-6 leading-tight md:leading-none">{selectedEbook.title}</h3>
-
-                                <div className="space-y-8">
-                                    <div>
-                                        <div className="flex items-center gap-2 mb-3 text-black opacity-40">
-                                            <BookOpen className="w-4 h-4" />
-                                            <span className="text-[10px] font-black tracking-widest uppercase">Introducción</span>
+                            {/* Desktop: side-by-side layout */}
+                            <div className="hidden md:flex gap-12 p-12 flex-1 overflow-y-auto">
+                                <div className="w-1/3 shrink-0">
+                                    <img
+                                        src={selectedEbook.image}
+                                        alt={selectedEbook.title}
+                                        className="w-full aspect-[3/4] object-cover rounded-3xl shadow-xl shadow-black/10"
+                                    />
+                                </div>
+                                <div className="flex-1 flex flex-col">
+                                    <button
+                                        onClick={() => setSelectedId(null)}
+                                        className="self-end p-2 hover:bg-black/5 rounded-full transition-all mb-4"
+                                    >
+                                        <X className="w-6 h-6" />
+                                    </button>
+                                    <span className="text-blue-500 font-bold tracking-[0.3em] text-[10px] uppercase mb-4 block italic">Contenido Exclusivo</span>
+                                    <h3 className="text-4xl font-black tracking-tighter uppercase mb-6 leading-none">{selectedEbook.title}</h3>
+                                    <div className="space-y-6 flex-1">
+                                        <div>
+                                            <div className="flex items-center gap-2 mb-3 text-black opacity-40">
+                                                <BookOpen className="w-4 h-4" />
+                                                <span className="text-[10px] font-black tracking-widest uppercase">Introducción</span>
+                                            </div>
+                                            <p className="text-gray-600 font-medium leading-relaxed">{selectedEbook.intro}</p>
                                         </div>
-                                        <p className="text-gray-600 font-medium leading-relaxed">{selectedEbook.intro}</p>
+                                        <div>
+                                            <div className="flex items-center gap-2 mb-4 text-black opacity-40">
+                                                <List className="w-4 h-4" />
+                                                <span className="text-[10px] font-black tracking-widest uppercase">Capítulos Clave</span>
+                                            </div>
+                                            <div className="grid grid-cols-2 gap-3">
+                                                {selectedEbook.chapters.map((chap, i) => (
+                                                    <div key={i} className="flex items-center gap-3 p-3 bg-[#F2F2F2] rounded-xl border border-black/5">
+                                                        <span className="text-blue-500 font-black text-[10px]">{String(i + 1).padStart(2, '0')}</span>
+                                                        <span className="text-xs font-bold text-black uppercase tracking-tight">{chap}</span>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        </div>
                                     </div>
+                                    <button
+                                        className="mt-8 w-full py-5 bg-black text-white font-black tracking-widest uppercase rounded-2xl hover:bg-blue-600 transition-all shadow-xl shadow-black/10 flex items-center justify-center gap-3"
+                                        onClick={handleAddToCart}
+                                    >
+                                        <ShoppingCart className="w-5 h-5" />
+                                        AÑADIR AL CARRITO — €{selectedEbook.price}
+                                    </button>
+                                    <button
+                                        onClick={() => setSelectedId(null)}
+                                        className="mt-3 w-full text-center text-xs text-gray-400 hover:text-black transition-colors"
+                                    >
+                                        Cerrar y seguir explorando
+                                    </button>
+                                </div>
+                            </div>
 
+                            {/* Mobile: scrollable content */}
+                            <div className="flex-1 overflow-y-auto px-5 pt-5 pb-2 md:hidden">
+                                <div className="flex items-start justify-between mb-3">
                                     <div>
-                                        <div className="flex items-center gap-2 mb-4 text-black opacity-40">
-                                            <List className="w-4 h-4" />
-                                            <span className="text-[10px] font-black tracking-widest uppercase">Capítulos Clave</span>
-                                        </div>
-                                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                                            {selectedEbook.chapters.map((chap, i) => (
-                                                <div key={i} className="flex items-center gap-3 p-3 bg-[#F2F2F2] rounded-xl border border-black/5">
-                                                    <span className="text-blue-500 font-black text-[10px]">{String(i + 1).padStart(2, '0')}</span>
-                                                    <span className="text-xs font-bold text-black uppercase tracking-tight">{chap}</span>
-                                                </div>
-                                            ))}
-                                        </div>
+                                        <span className="text-blue-500 font-bold tracking-[0.3em] text-[9px] uppercase mb-1 block italic">Contenido Exclusivo</span>
+                                        <h3 className="text-2xl font-black tracking-tighter uppercase leading-tight">{selectedEbook.title}</h3>
                                     </div>
                                 </div>
 
+                                <div className="flex items-center gap-2 mb-2 text-black/40">
+                                    <BookOpen className="w-3 h-3" />
+                                    <span className="text-[9px] font-black tracking-widest uppercase">Introducción</span>
+                                </div>
+                                <p className="text-gray-600 text-sm font-medium leading-relaxed mb-4">{selectedEbook.intro}</p>
+
+                                <div className="flex items-center gap-2 mb-3 text-black/40">
+                                    <List className="w-3 h-3" />
+                                    <span className="text-[9px] font-black tracking-widest uppercase">Capítulos Clave</span>
+                                </div>
+                                <div className="grid grid-cols-2 gap-2 mb-2">
+                                    {selectedEbook.chapters.map((chap, i) => (
+                                        <div key={i} className="flex items-center gap-2 p-2.5 bg-[#F2F2F2] rounded-xl border border-black/5">
+                                            <span className="text-blue-500 font-black text-[9px] shrink-0">{String(i + 1).padStart(2, '0')}</span>
+                                            <span className="text-[10px] font-bold text-black uppercase tracking-tight leading-tight">{chap}</span>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+
+                            {/* Mobile: sticky add-to-cart */}
+                            <div className="md:hidden px-5 pt-3 pb-6 border-t border-black/5 shrink-0">
                                 <button
-                                    className="mt-10 w-full py-5 bg-black text-white font-black tracking-widest uppercase rounded-2xl hover:bg-blue-600 transition-all shadow-xl shadow-black/10 flex items-center justify-center gap-3"
+                                    className="w-full py-4 bg-black text-white font-black tracking-widest uppercase rounded-2xl active:bg-blue-600 transition-all flex items-center justify-center gap-3 text-sm"
                                     onClick={handleAddToCart}
                                 >
-                                    <ShoppingCart className="w-5 h-5" />
+                                    <ShoppingCart className="w-4 h-4" />
                                     AÑADIR AL CARRITO — €{selectedEbook.price}
                                 </button>
                                 <button
                                     onClick={() => setSelectedId(null)}
-                                    className="mt-4 w-full text-center text-xs text-gray-400 hover:text-black transition-colors"
+                                    className="mt-2 w-full text-center text-xs text-gray-400"
                                 >
                                     Cerrar y seguir explorando
                                 </button>
