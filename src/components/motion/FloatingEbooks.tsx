@@ -60,26 +60,32 @@ const EBOOKS = [
 
 export function FloatingEbooks() {
     const [selectedId, setSelectedId] = useState<string | null>(null);
-    const [spacing, setSpacing] = useState(220);
+    const [config, setConfig] = useState({ spacing: 220, xVariance: 60 });
     const { addItem } = useCart();
 
     useEffect(() => {
-        const update = () => setSpacing(window.innerWidth < 640 ? 110 : window.innerWidth < 1024 ? 160 : 220);
+        const update = () => {
+            const w = window.innerWidth;
+            if (w < 640) setConfig({ spacing: 60, xVariance: 10 });
+            else if (w < 1024) setConfig({ spacing: 160, xVariance: 40 });
+            else setConfig({ spacing: 220, xVariance: 60 });
+        };
         update();
         window.addEventListener('resize', update);
         return () => window.removeEventListener('resize', update);
     }, []);
 
     const animatedItems = useMemo(() => {
+        const { spacing, xVariance } = config;
         return EBOOKS.map((ebook, index) => {
             const basePageX = (index - (EBOOKS.length - 1) / 2) * spacing;
             return {
                 ...ebook,
                 baseX: basePageX,
                 xPath: [
-                    basePageX + (Math.random() * 60 - 30),
-                    basePageX + (Math.random() * 120 - 60),
-                    basePageX + (Math.random() * 60 - 30),
+                    basePageX + (Math.random() * xVariance - xVariance / 2),
+                    basePageX + (Math.random() * xVariance * 2 - xVariance),
+                    basePageX + (Math.random() * xVariance - xVariance / 2),
                 ],
                 yPath: [
                     Math.random() * 300 - 150,
@@ -94,7 +100,7 @@ export function FloatingEbooks() {
                 duration: 12 + Math.random() * 10
             };
         });
-    }, [spacing]);
+    }, [config]);
 
     const selectedEbook = EBOOKS.find(e => e.id === selectedId);
 
