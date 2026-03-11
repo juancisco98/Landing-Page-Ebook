@@ -19,6 +19,10 @@ export default function RootLayout({
     return (
         <html lang="es" className="scroll-smooth" suppressHydrationWarning>
             <body className={inter.className}>
+                {/* Full-page aurora — z:-1 in root stacking context, visible through transparent body */}
+                <div className="fixed inset-0 overflow-hidden pointer-events-none" style={{ zIndex: -1 }}>
+                    <div className="aurora-layer" />
+                </div>
                 <Navbar />
                 {children}
                 <CartDrawer />

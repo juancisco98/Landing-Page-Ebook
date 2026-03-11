@@ -27,7 +27,7 @@ export default function FAQ() {
     const [openIndex, setOpenIndex] = useState<number | null>(null);
 
     return (
-        <section className="py-32 bg-[#F2F2F2]">
+        <section className="py-32 bg-transparent">
             <div className="container mx-auto px-6 max-w-3xl">
                 <div className="mb-16 text-center">
                     <span className="text-blue-500 font-black tracking-[0.3em] text-[10px] uppercase mb-6 block">Sin letra pequeña</span>

@@ -12,7 +12,7 @@ const FEATURES = [
 
 export function Comparison() {
     return (
-        <section className="py-24 bg-[#F2F2F2]">
+        <section className="py-24 bg-transparent">
             <div className="container mx-auto px-6">
                 <div className="text-center mb-20">
                     <span className="text-blue-500 font-bold tracking-widest text-[10px] uppercase mb-4 block">VS MENTORÍAS</span>

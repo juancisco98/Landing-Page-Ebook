@@ -101,7 +101,7 @@ export function FloatingEbooks() {
     };
 
     return (
-        <section id="e-books" className="py-8 bg-[#F2F2F2] overflow-hidden min-h-[700px] relative flex flex-col items-center">
+        <section id="e-books" className="py-8 bg-transparent overflow-hidden min-h-[700px] relative flex flex-col items-center">
             <div className="relative w-full max-w-7xl h-[650px] flex items-center justify-center">
                 {animatedItems.map((item, index) => (
                     <motion.div

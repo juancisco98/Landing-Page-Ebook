@@ -19,7 +19,7 @@ function SectionDivider() {
 
 export default function Home() {
     return (
-        <main className="min-h-screen bg-[#F2F2F2]">
+        <main className="min-h-screen bg-transparent">
             <Hero />
 
             {/* Zero Gravity Ebooks Section */}
@@ -43,7 +43,7 @@ export default function Home() {
             <div id="ebooks"><ProductGrid /></div>
 
             {/* Final CTA / Footer */}
-            <footer className="py-32 px-6 border-t border-black/5 bg-white text-center">
+            <footer className="py-32 px-6 border-t border-black/5 bg-transparent text-center">
                 <div className="max-w-3xl mx-auto">
                     <span className="text-blue-500 font-black tracking-[0.3em] text-[10px] uppercase mb-8 block">Inversión Inteligente</span>
                     <h2 className="text-5xl md:text-7xl font-black tracking-tighter mb-12 text-black leading-[0.9]">

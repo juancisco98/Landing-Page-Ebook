@@ -4,10 +4,7 @@ import { motion } from 'framer-motion';
 
 export default function Hero() {
     return (
-        <section className="relative pt-32 pb-16 overflow-hidden bg-[#F2F2F2]">
-            {/* Ambient Glow */}
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[400px] bg-blue-500/10 blur-[120px] rounded-full -z-10" />
-
+        <section className="relative pt-32 pb-16 overflow-hidden">
             <div className="container mx-auto px-6 text-center">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}

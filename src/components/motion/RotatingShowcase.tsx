@@ -20,7 +20,7 @@ export function RotatingShowcase() {
     const rotate = useTransform(scrollYProgress, [0, 1], [0, 360]);
 
     return (
-        <section ref={containerRef} className="py-24 overflow-hidden bg-[#F2F2F2]">
+        <section ref={containerRef} className="py-24 overflow-hidden bg-transparent">
             <div className="container mx-auto px-6">
                 <div className="flex flex-col items-center justify-center min-h-[60vh] scene-3d">
                     <motion.div
