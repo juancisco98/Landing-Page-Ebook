@@ -1,7 +1,7 @@
 'use client';
 
 import { motion, AnimatePresence } from 'framer-motion';
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { X, BookOpen, List, ShoppingCart } from 'lucide-react';
 import { useCart } from '@/hooks/useCart';
 
@@ -60,11 +60,19 @@ const EBOOKS = [
 
 export function FloatingEbooks() {
     const [selectedId, setSelectedId] = useState<string | null>(null);
+    const [spacing, setSpacing] = useState(220);
     const { addItem } = useCart();
+
+    useEffect(() => {
+        const update = () => setSpacing(window.innerWidth < 640 ? 110 : window.innerWidth < 1024 ? 160 : 220);
+        update();
+        window.addEventListener('resize', update);
+        return () => window.removeEventListener('resize', update);
+    }, []);
 
     const animatedItems = useMemo(() => {
         return EBOOKS.map((ebook, index) => {
-            const basePageX = (index - (EBOOKS.length - 1) / 2) * 220;
+            const basePageX = (index - (EBOOKS.length - 1) / 2) * spacing;
             return {
                 ...ebook,
                 baseX: basePageX,
@@ -86,7 +94,7 @@ export function FloatingEbooks() {
                 duration: 12 + Math.random() * 10
             };
         });
-    }, []);
+    }, [spacing]);
 
     const selectedEbook = EBOOKS.find(e => e.id === selectedId);
 
@@ -101,8 +109,8 @@ export function FloatingEbooks() {
     };
 
     return (
-        <section id="e-books" className="py-8 bg-transparent overflow-hidden min-h-[700px] relative flex flex-col items-center">
-            <div className="relative w-full max-w-7xl h-[650px] flex items-center justify-center">
+        <section id="e-books" className="py-8 bg-transparent overflow-hidden min-h-[420px] md:min-h-[700px] relative flex flex-col items-center">
+            <div className="relative w-full max-w-7xl h-[400px] md:h-[650px] flex items-center justify-center">
                 {animatedItems.map((item, index) => (
                     <motion.div
                         key={item.id}
@@ -129,7 +137,7 @@ export function FloatingEbooks() {
                             <img
                                 src={item.image}
                                 alt={item.title}
-                                className="w-44 h-60 md:w-56 md:h-72 object-cover rounded-[24px] shadow-[0_30px_60px_-15px_rgba(0,0,0,0.3)] border border-white/20 backdrop-blur-sm transition-shadow duration-500 group-hover:shadow-[0_40px_80px_-15px_rgba(59,130,246,0.3)]"
+                                className="w-28 h-40 sm:w-36 sm:h-48 md:w-44 md:h-60 lg:w-56 lg:h-72 object-cover rounded-[24px] shadow-[0_30px_60px_-15px_rgba(0,0,0,0.3)] border border-white/20 backdrop-blur-sm transition-shadow duration-500 group-hover:shadow-[0_40px_80px_-15px_rgba(59,130,246,0.3)]"
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-blue-600/40 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 rounded-[24px] flex flex-col items-center justify-end pb-8">
                                 <motion.div

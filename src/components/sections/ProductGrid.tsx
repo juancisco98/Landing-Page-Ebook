@@ -51,23 +51,23 @@ export default function ProductGrid() {
     const { addItem } = useCart();
 
     return (
-        <section id="products" className="py-32 bg-transparent">
-            <div className="container mx-auto px-6">
-                <div className="flex flex-col md:flex-row justify-between items-end mb-20 gap-8">
+        <section id="products" className="py-16 md:py-32 bg-transparent">
+            <div className="container mx-auto px-4 md:px-6">
+                <div className="flex flex-col md:flex-row justify-between items-end mb-12 md:mb-20 gap-6 md:gap-8">
                     <div>
                         <span className="text-blue-500 font-black tracking-[0.3em] text-[10px] uppercase mb-6 block">Catálogo Exclusivo</span>
-                        <h2 className="text-5xl md:text-7xl font-black tracking-tighter text-black uppercase leading-[0.9] whitespace-nowrap">
+                        <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-black tracking-tighter text-black uppercase leading-[0.9] lg:whitespace-nowrap">
                             NUESTRO <span className="text-blue-500 italic">CATÁLOGO</span>
                         </h2>
                     </div>
-                    <div className="text-right">
+                    <div className="text-left md:text-right">
                         <p className="text-gray-400 font-bold text-xs tracking-widest uppercase mb-1">
                             Acceso instantáneo tras la compra
                         </p>
                     </div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
                     {EBOOKS.map((ebook, index) => (
                         <motion.div
                             key={ebook.id}

@@ -27,11 +27,11 @@ export default function FAQ() {
     const [openIndex, setOpenIndex] = useState<number | null>(null);
 
     return (
-        <section className="py-32 bg-transparent">
-            <div className="container mx-auto px-6 max-w-3xl">
-                <div className="mb-16 text-center">
+        <section className="py-16 md:py-32 bg-transparent">
+            <div className="container mx-auto px-4 md:px-6 max-w-3xl">
+                <div className="mb-10 md:mb-16 text-center">
                     <span className="text-blue-500 font-black tracking-[0.3em] text-[10px] uppercase mb-6 block">Sin letra pequeña</span>
-                    <h2 className="text-5xl md:text-6xl font-black tracking-tighter text-black uppercase leading-[0.9]">
+                    <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tighter text-black uppercase leading-[0.9]">
                         LO QUE SIEMPRE <span className="text-blue-500 italic">PREGUNTAN</span>
                     </h2>
                 </div>
@@ -48,7 +48,7 @@ export default function FAQ() {
                         >
                             <button
                                 onClick={() => setOpenIndex(openIndex === index ? null : index)}
-                                className="w-full flex items-center justify-between px-8 py-6 text-left"
+                                className="w-full flex items-center justify-between px-4 md:px-8 py-4 md:py-6 text-left"
                             >
                                 <span className="font-black text-sm tracking-tight text-black pr-8">{faq.q}</span>
                                 <motion.div
@@ -68,7 +68,7 @@ export default function FAQ() {
                                         exit={{ height: 0, opacity: 0 }}
                                         transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
                                     >
-                                        <p className="px-8 pb-6 text-sm text-gray-500 leading-relaxed font-medium">
+                                        <p className="px-4 md:px-8 pb-4 md:pb-6 text-sm text-gray-500 leading-relaxed font-medium">
                                             {faq.a}
                                         </p>
                                     </motion.div>

@@ -66,25 +66,25 @@ const thirdColumn = testimonials.slice(6, 9);
 
 export function TestimonialsSection() {
     return (
-        <section className="bg-transparent py-32 relative overflow-hidden">
-            <div className="container mx-auto px-6 z-10 relative">
+        <section className="bg-transparent py-16 md:py-32 relative overflow-hidden">
+            <div className="container mx-auto px-4 md:px-6 z-10 relative">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
                     viewport={{ once: true }}
-                    className="flex flex-col items-center justify-center max-w-[540px] mx-auto text-center mb-20"
+                    className="flex flex-col items-center justify-center max-w-[540px] mx-auto text-center mb-12 md:mb-20"
                 >
                     <span className="text-blue-500 font-bold tracking-[0.3em] text-[10px] uppercase mb-6">Social Proof</span>
-                    <h2 className="text-5xl md:text-7xl font-black tracking-tighter text-black uppercase leading-[0.9]">
+                    <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-black tracking-tighter text-black uppercase leading-[0.9]">
                         LO QUE DICE <br /><span className="text-blue-500 italic">NUESTRA GENTE</span>
                     </h2>
-                    <p className="mt-8 text-gray-500 font-medium text-lg leading-relaxed">
+                    <p className="mt-6 md:mt-8 text-gray-500 font-medium text-base md:text-lg leading-relaxed">
                         Sin filtros, sin ediciones. Resultados reales de personas que dejaron de pagar el impuesto del gurú.
                     </p>
                 </motion.div>
 
-                <div className="flex justify-center gap-8 mt-10 [mask-image:linear-gradient(to_bottom,transparent,black_20%,black_80%,transparent)] max-h-[800px] overflow-hidden">
+                <div className="flex justify-center gap-4 md:gap-8 mt-10 [mask-image:linear-gradient(to_bottom,transparent,black_20%,black_80%,transparent)] max-h-[500px] md:max-h-[800px] overflow-hidden">
                     <TestimonialsColumn testimonials={firstColumn} duration={25} />
                     <TestimonialsColumn testimonials={secondColumn} className="hidden md:block" duration={35} />
                     <TestimonialsColumn testimonials={thirdColumn} className="hidden lg:block" duration={30} />

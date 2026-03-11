@@ -29,6 +29,7 @@ El agente debe invocar estas skills desde `skills.sh`:
 2.  **No Ghost Code**: No dejar comentarios `// TODO` o funciones vacías. Todo el código debe ser funcional.
 3.  **Type Safety**: Prohibido el uso de `any`. Toda respuesta de la API de Shopify debe estar tipada en `@/types/shopify.d.ts`.
 4.  **Optimistic UI**: Las acciones de "Añadir al carrito" deben reflejarse instantáneamente en la UI antes de recibir confirmación del servidor.
+5.  **Auto-Aprendizaje de Errores**: Cuando el usuario corrija un error cometido por el agente, este debe registrar la lección aprendida en `memory/errors-learned.md` con el patrón exacto del error y cómo evitarlo. En sesiones futuras, consultar ese archivo antes de implementar cambios similares. Nunca repetir el mismo error dos veces.
 
 ---
 
