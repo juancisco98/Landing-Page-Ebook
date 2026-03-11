@@ -120,8 +120,8 @@ export function FloatingEbooks() {
                 {animatedItems.map((item, index) => (
                     <motion.div
                         key={item.id}
-                        className="absolute cursor-pointer"
-                        style={{ zIndex: 10 + index, willChange: 'transform', touchAction: 'manipulation' }}
+                        className="absolute"
+                        style={{ zIndex: 10 + index, willChange: 'transform', pointerEvents: 'none' }}
                         initial={{ x: item.baseX, y: 0, rotate: 0, opacity: 0 }}
                         animate={{ x: item.xPath, y: item.yPath, rotate: item.rotatePath, opacity: 1 }}
                         transition={{
@@ -131,9 +131,8 @@ export function FloatingEbooks() {
                             ease: "easeInOut",
                             opacity: { duration: 1 }
                         }}
-                        onClick={() => setSelectedId(item.id)}
                     >
-                        <div className="relative group">
+                        <div className="relative group cursor-pointer" style={{ pointerEvents: 'auto' }} onClick={() => setSelectedId(item.id)}>
                             <img
                                 src={item.image}
                                 alt={item.title}
