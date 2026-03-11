@@ -1,0 +1,56 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 95%;
+    /* #F2F2F2 */
+    --foreground: 0 0% 7%;
+    /* #111111 */
+    --primary: 201 100% 50%;
+    /* Cyber Blue #00A3FF */
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 7%;
+    --border: 0 0% 90%;
+    --accent: 201 100% 50%;
+  }
+
+  .dark {
+    --background: 0 0% 3%;
+    --foreground: 0 0% 98%;
+  }
+}
+
+body {
+  color: hsl(var(--foreground));
+  background-color: hsl(var(--background));
+  @apply antialiased selection:bg-blue-500 selection:text-white;
+  font-feature-settings: "ss01", "ss02", "cv01", "cv02";
+}
+
+@layer components {
+  .glass-morphism {
+    @apply bg-white/40 backdrop-blur-xl border border-black/5 shadow-sm;
+  }
+
+  .btn-pill {
+    @apply rounded-full px-8 py-3 font-bold transition-all hover:scale-105 active:scale-95;
+  }
+
+  .text-massive {
+    @apply text-5xl md:text-8xl font-black tracking-tighter leading-[0.85];
+  }
+}
+
+/* 3D Scene Container */
+.scene-3d {
+  perspective: 1200px;
+}
+
+.cube-3d {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+}
