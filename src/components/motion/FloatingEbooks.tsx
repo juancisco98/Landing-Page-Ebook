@@ -168,11 +168,11 @@ export function FloatingEbooks() {
                             onClick={e => e.stopPropagation()}
                         >
                             {/* Mobile: cover image at top with overlay */}
-                            <div className="relative h-52 shrink-0 md:hidden">
+                            <div className="relative shrink-0 md:hidden bg-gray-50" style={{ paddingBottom: '75%' }}>
                                 <img
                                     src={selectedEbook.image}
                                     alt={selectedEbook.title}
-                                    className="w-full h-full object-cover"
+                                    className="absolute inset-0 w-full h-full object-contain"
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/60" />
                                 <button
