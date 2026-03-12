@@ -1,14 +1,8 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
-import dynamic from 'next/dynamic';
 import { ChevronLeft, ChevronRight, ShoppingCart, List, X } from 'lucide-react';
 import { useCart } from '@/hooks/useCart';
-
-const PdfPageViewer = dynamic(
-    () => import('@/components/ui/PdfPageViewer').then(m => ({ default: m.PdfPageViewer })),
-    { ssr: false, loading: () => <div className="w-full h-full flex items-center justify-center"><div className="w-6 h-6 border-2 border-blue-500 border-t-transparent rounded-full animate-spin" /></div> }
-);
 
 const EBOOKS = [
     {
@@ -18,10 +12,7 @@ const EBOOKS = [
         tag: 'LOGÍSTICA',
         price: '19.99',
         image: '/covers/importar coches.png',
-        pdfUrl: '/Importacion de alemania a españa.pdf',
-        pdfPageCount: 3,
-        imageUrl: null as string | null,
-        introPages: [] as string[],
+        introImageUrl: null as string | null,
         chapters: ['Búsqueda en Mobile.de', 'Negociación en Alemán', 'Logística y Transporte', 'Matriculación en España'],
     },
     {
@@ -31,10 +22,7 @@ const EBOOKS = [
         tag: 'IA',
         price: '9.99',
         image: '/covers/dinero con IA.png',
-        pdfUrl: '/dinero con IA.pdf',
-        pdfPageCount: 3,
-        imageUrl: null as string | null,
-        introPages: [] as string[],
+        introImageUrl: null as string | null,
         chapters: ['Modelos de Negocio IA', 'Automatización de Servicios', 'Creación de Agentes', 'Escalado con API'],
     },
     {
@@ -44,10 +32,7 @@ const EBOOKS = [
         tag: 'E-COMM',
         price: '19.99',
         image: '/covers/dropshipping.png',
-        pdfUrl: '/EBOOK DROPSHIPPING (1).pdf',
-        pdfPageCount: 3,
-        imageUrl: null as string | null,
-        introPages: [] as string[],
+        introImageUrl: null as string | null,
         chapters: ['Selección de Ganadores', 'Proveedores Orgánicos', 'Publicidad de Alto Retorno', 'Gestión de Devoluciones'],
     },
     {
@@ -57,10 +42,7 @@ const EBOOKS = [
         tag: 'INVERSIÓN',
         price: '11.99',
         image: '/covers/subastas judiciales.jpeg',
-        pdfUrl: null as string | null,
-        pdfPageCount: 0,
-        imageUrl: '/subasta judiciales.jpeg',
-        introPages: [] as string[],
+        introImageUrl: '/subasta judiciales.jpeg',
         chapters: ['Lectura de Edictos', 'Cálculo de Cargas', 'Estrategia de Puja', 'Toma de Posesión'],
     },
     {
@@ -70,56 +52,29 @@ const EBOOKS = [
         tag: 'MENTALIDAD',
         price: '9.99',
         image: '/covers/precoz.png',
-        pdfUrl: '/ser precoz.pdf',
-        pdfPageCount: 3,
-        imageUrl: null as string | null,
-        introPages: [] as string[],
+        introImageUrl: null as string | null,
         chapters: ['Biología del Control', 'Protocolo de Respiración', 'Ejercicios de Piso Pélvico', 'Psicología de la Calma'],
     },
 ];
 
 function EbookCard({ ebook }: { ebook: typeof EBOOKS[0] }) {
     const [flipped, setFlipped] = useState(false);
-    const [slide, setSlide] = useState(0);
-    const [containerWidth, setContainerWidth] = useState(0);
-    const backRef = useRef<HTMLDivElement>(null);
+    const [showChapters, setShowChapters] = useState(false);
     const isMobile = useRef(false);
     const { addItem } = useCart();
 
-    // Measure back card width for PDF rendering
-    useEffect(() => {
-        const el = backRef.current;
-        if (!el) return;
-        const ro = new ResizeObserver(entries => {
-            setContainerWidth(entries[0].contentRect.width);
-        });
-        ro.observe(el);
-        return () => ro.disconnect();
-    }, []);
-
-    // totalSlides: PDF pages + chapters / image + chapters / introPages + chapters
-    const totalSlides = ebook.pdfUrl
-        ? ebook.pdfPageCount + 1
-        : ebook.imageUrl
-            ? 2
-            : ebook.introPages.length + 1;
-
-    const handleFlipIn = () => { if (!isMobile.current) { setFlipped(true); setSlide(0); } };
+    const handleFlipIn = () => { if (!isMobile.current) { setFlipped(true); setShowChapters(false); } };
     const handleFlipOut = () => { if (!isMobile.current) setFlipped(false); };
     const handleTap = () => {
         isMobile.current = true;
-        setFlipped(f => { if (!f) setSlide(0); return !f; });
+        if (!flipped) setShowChapters(false);
+        setFlipped(f => !f);
     };
-
-    const prevSlide = (e: React.MouseEvent) => { e.stopPropagation(); setSlide(s => Math.max(0, s - 1)); };
-    const nextSlide = (e: React.MouseEvent) => { e.stopPropagation(); setSlide(s => Math.min(totalSlides - 1, s + 1)); };
 
     const handleAddToCart = (e: React.MouseEvent) => {
         e.stopPropagation();
         addItem(ebook.variantId, 1, { title: ebook.title, price: ebook.price, image: ebook.image });
     };
-
-    const isLastSlide = slide === totalSlides - 1;
 
     return (
         <div
@@ -154,25 +109,42 @@ function EbookCard({ ebook }: { ebook: typeof EBOOKS[0] }) {
 
                 {/* BACK */}
                 <div
-                    ref={backRef}
                     className="absolute inset-0 rounded-[24px] overflow-hidden bg-white flex flex-col"
                     style={{ backfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}
                 >
                     {/* Header */}
-                    <div className="flex items-center justify-between px-4 pt-4 pb-3 border-b border-black/5 shrink-0">
-                        <div>
+                    <div className="flex items-center justify-between px-4 pt-3 pb-2.5 border-b border-black/5 shrink-0">
+                        <div className="flex-1 min-w-0">
                             <span className="text-blue-500 font-bold tracking-[0.25em] text-[9px] uppercase italic block mb-0.5">{ebook.tag}</span>
-                            <h3 className="text-sm font-black tracking-tight uppercase leading-tight text-black">{ebook.title}</h3>
+                            <h3 className="text-sm font-black tracking-tight uppercase leading-tight text-black truncate">{ebook.title}</h3>
                         </div>
-                        <button onClick={(e) => { e.stopPropagation(); setFlipped(false); }} className="w-7 h-7 flex items-center justify-center rounded-full bg-black/5 hover:bg-black/10 transition-colors shrink-0">
-                            <X className="w-3.5 h-3.5 text-black/60" />
-                        </button>
+                        <div className="flex items-center gap-1.5 shrink-0 ml-2">
+                            {/* Toggle chapters */}
+                            <button
+                                onClick={(e) => { e.stopPropagation(); setShowChapters(c => !c); }}
+                                className={`w-7 h-7 flex items-center justify-center rounded-full transition-colors ${showChapters ? 'bg-blue-500 text-white' : 'bg-black/5 hover:bg-black/10 text-black/60'}`}
+                                title="Ver capítulos"
+                            >
+                                <List className="w-3.5 h-3.5" />
+                            </button>
+                            {/* Close */}
+                            <button
+                                onClick={(e) => { e.stopPropagation(); setFlipped(false); }}
+                                className="w-7 h-7 flex items-center justify-center rounded-full bg-black/5 hover:bg-black/10 transition-colors"
+                            >
+                                <X className="w-3.5 h-3.5 text-black/60" />
+                            </button>
+                        </div>
                     </div>
 
-                    {/* Slide content */}
-                    <div className="flex-1 overflow-hidden relative">
-                        {isLastSlide ? (
-                            <div className="absolute inset-0 px-4 py-3 overflow-y-auto">
+                    {/* Content — scrollable */}
+                    <div
+                        className="flex-1 overflow-y-auto relative"
+                        style={{ touchAction: 'pan-y' }}
+                        onClick={e => e.stopPropagation()}
+                    >
+                        {showChapters ? (
+                            <div className="px-4 py-3">
                                 <div className="flex items-center gap-1.5 mb-3 text-black/40">
                                     <List className="w-3 h-3" />
                                     <span className="text-[9px] font-black tracking-widest uppercase">Capítulos</span>
@@ -186,42 +158,25 @@ function EbookCard({ ebook }: { ebook: typeof EBOOKS[0] }) {
                                     ))}
                                 </div>
                             </div>
-                        ) : ebook.pdfUrl ? (
-                            // PDF page rendering
-                            <div className="absolute inset-0 overflow-hidden flex items-start justify-center">
-                                {containerWidth > 0 && (
-                                    <PdfPageViewer url={ebook.pdfUrl} page={slide + 1} width={containerWidth} />
-                                )}
-                            </div>
-                        ) : ebook.imageUrl ? (
-                            // JPEG fallback (subastas)
-                            <div className="absolute inset-0 overflow-hidden flex items-start justify-center">
-                                <img src={ebook.imageUrl} alt={ebook.title} className="w-full h-full object-contain" />
-                            </div>
+                        ) : ebook.introImageUrl ? (
+                            /* Intro image — full width, vertical scroll to read */
+                            <img
+                                src={ebook.introImageUrl}
+                                alt="Introducción"
+                                className="w-full h-auto block"
+                                draggable={false}
+                            />
                         ) : (
-                            // Intro text fallback
-                            <div className="absolute inset-0 px-4 py-3 overflow-y-auto">
-                                <p className="text-[11px] text-gray-600 font-medium leading-relaxed">{ebook.introPages[slide]}</p>
+                            <div className="h-full flex flex-col items-center justify-center gap-3 px-6 text-center">
+                                <span className="text-4xl">📖</span>
+                                <p className="text-[10px] text-gray-400 font-bold tracking-widest uppercase">Introducción próximamente</p>
                             </div>
                         )}
                     </div>
 
-                    {/* Carousel nav + CTA */}
+                    {/* Footer CTA */}
                     <div className="shrink-0 px-4 pb-3 pt-2 border-t border-black/5">
-                        <div className="flex items-center justify-between mb-2">
-                            <button onClick={prevSlide} disabled={slide === 0} className="w-7 h-7 flex items-center justify-center rounded-full bg-black/5 hover:bg-black/10 transition-colors disabled:opacity-25">
-                                <ChevronLeft className="w-4 h-4" />
-                            </button>
-                            <div className="flex gap-1.5 items-center">
-                                {Array.from({ length: totalSlides }).map((_, i) => (
-                                    <button key={i} onClick={(e) => { e.stopPropagation(); setSlide(i); }} className={`rounded-full transition-all ${i === slide ? 'w-4 h-1.5 bg-blue-500' : 'w-1.5 h-1.5 bg-black/20'}`} />
-                                ))}
-                            </div>
-                            <button onClick={nextSlide} disabled={slide === totalSlides - 1} className="w-7 h-7 flex items-center justify-center rounded-full bg-black/5 hover:bg-black/10 transition-colors disabled:opacity-25">
-                                <ChevronRight className="w-4 h-4" />
-                            </button>
-                        </div>
-                        <button onClick={handleAddToCart} className="w-full py-4 bg-black text-white font-black tracking-widest uppercase rounded-xl hover:bg-blue-600 active:bg-blue-700 transition-all flex items-center justify-center gap-2 text-xs mb-2">
+                        <button onClick={handleAddToCart} className="w-full py-4 bg-black text-white font-black tracking-widest uppercase rounded-xl hover:bg-blue-600 active:bg-blue-700 transition-all flex items-center justify-center gap-2 text-xs">
                             <ShoppingCart className="w-4 h-4" />
                             Añadir al carrito — €{ebook.price}
                         </button>
@@ -233,8 +188,36 @@ function EbookCard({ ebook }: { ebook: typeof EBOOKS[0] }) {
 }
 
 export function EbookCatalog() {
+    const scrollRef = useRef<HTMLDivElement>(null);
+    const [canScrollLeft, setCanScrollLeft] = useState(false);
+    const [canScrollRight, setCanScrollRight] = useState(true);
+
+    const updateScrollState = () => {
+        const el = scrollRef.current;
+        if (!el) return;
+        setCanScrollLeft(el.scrollLeft > 4);
+        setCanScrollRight(el.scrollLeft < el.scrollWidth - el.clientWidth - 4);
+    };
+
+    useEffect(() => {
+        const el = scrollRef.current;
+        if (!el) return;
+        el.addEventListener('scroll', updateScrollState, { passive: true });
+        updateScrollState();
+        return () => el.removeEventListener('scroll', updateScrollState);
+    }, []);
+
+    const scroll = (dir: 'left' | 'right') => {
+        const el = scrollRef.current;
+        if (!el) return;
+        // Scroll by ~1 card width
+        const cardEl = el.firstElementChild as HTMLElement | null;
+        const amount = cardEl ? cardEl.offsetWidth + 20 : el.clientWidth * 0.75;
+        el.scrollBy({ left: dir === 'left' ? -amount : amount, behavior: 'smooth' });
+    };
+
     return (
-        <section className="py-16 md:py-28 bg-[#F5F4F0]">
+        <section id="e-books" className="py-16 md:py-28 bg-[#F5F4F0] scroll-mt-16">
             <div className="container mx-auto px-4 md:px-6">
                 <div className="text-center mb-12 md:mb-16">
                     <span className="text-blue-500 font-black tracking-[0.3em] text-[10px] uppercase mb-6 block">Catálogo Completo</span>
@@ -242,14 +225,51 @@ export function EbookCatalog() {
                         ELIGE TU <span className="text-blue-500 italic">PRÓXIMO MOVIMIENTO</span>
                     </h2>
                     <p className="mt-4 text-gray-500 font-medium text-sm md:text-base max-w-xl mx-auto leading-relaxed">
-                        Pasa el cursor por encima para ver las páginas reales. En móvil, toca la portada.
+                        Pasa el cursor por encima para ver la introducción. En móvil, toca la portada.
                     </p>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 max-w-5xl mx-auto">
-                    {EBOOKS.map(ebook => (
-                        <EbookCard key={ebook.id} ebook={ebook} />
-                    ))}
+                {/* Horizontal carousel */}
+                <div className="relative max-w-5xl mx-auto">
+                    <div
+                        ref={scrollRef}
+                        onScroll={updateScrollState}
+                        className="flex gap-5 md:gap-6 overflow-x-auto pb-4"
+                        style={{
+                            scrollbarWidth: 'none',
+                            msOverflowStyle: 'none',
+                            scrollSnapType: 'x mandatory',
+                            WebkitOverflowScrolling: 'touch',
+                        } as React.CSSProperties}
+                    >
+                        {EBOOKS.map(ebook => (
+                            <div
+                                key={ebook.id}
+                                className="shrink-0"
+                                style={{ width: 'min(72vw, 280px)', scrollSnapAlign: 'start' }}
+                            >
+                                <EbookCard ebook={ebook} />
+                            </div>
+                        ))}
+                    </div>
+
+                    {/* Navigation arrows */}
+                    <div className="flex justify-center gap-3 mt-6">
+                        <button
+                            onClick={() => scroll('left')}
+                            disabled={!canScrollLeft}
+                            className="w-10 h-10 bg-white rounded-full shadow-md flex items-center justify-center transition-all disabled:opacity-25 hover:bg-black hover:text-white"
+                        >
+                            <ChevronLeft className="w-5 h-5" />
+                        </button>
+                        <button
+                            onClick={() => scroll('right')}
+                            disabled={!canScrollRight}
+                            className="w-10 h-10 bg-white rounded-full shadow-md flex items-center justify-center transition-all disabled:opacity-25 hover:bg-black hover:text-white"
+                        >
+                            <ChevronRight className="w-5 h-5" />
+                        </button>
+                    </div>
                 </div>
             </div>
         </section>
