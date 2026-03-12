@@ -12,7 +12,7 @@ const EBOOKS = [
         tag: 'LOGÍSTICA',
         price: '19.99',
         image: '/covers/importar coches.png',
-        introImageUrl: null as string | null,
+        introImageUrl: '/importar de alemania a españa.jpg',
         chapters: ['Búsqueda en Mobile.de', 'Negociación en Alemán', 'Logística y Transporte', 'Matriculación en España'],
     },
     {
@@ -22,7 +22,7 @@ const EBOOKS = [
         tag: 'IA',
         price: '9.99',
         image: '/covers/dinero con IA.png',
-        introImageUrl: null as string | null,
+        introImageUrl: '/dinero con ia.jpg',
         chapters: ['Modelos de Negocio IA', 'Automatización de Servicios', 'Creación de Agentes', 'Escalado con API'],
     },
     {
@@ -32,7 +32,7 @@ const EBOOKS = [
         tag: 'E-COMM',
         price: '19.99',
         image: '/covers/dropshipping.png',
-        introImageUrl: null as string | null,
+        introImageUrl: '/dropshipping.jpg',
         chapters: ['Selección de Ganadores', 'Proveedores Orgánicos', 'Publicidad de Alto Retorno', 'Gestión de Devoluciones'],
     },
     {
@@ -52,7 +52,7 @@ const EBOOKS = [
         tag: 'MENTALIDAD',
         price: '9.99',
         image: '/covers/precoz.png',
-        introImageUrl: null as string | null,
+        introImageUrl: '/ser precoz.jpg',
         chapters: ['Biología del Control', 'Protocolo de Respiración', 'Ejercicios de Piso Pélvico', 'Psicología de la Calma'],
     },
 ];
