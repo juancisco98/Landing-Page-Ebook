@@ -60,7 +60,7 @@ const EBOOKS = [
 
 export function FloatingEbooks() {
     const [selectedId, setSelectedId] = useState<string | null>(null);
-    const [config, setConfig] = useState({ spacing: 220, xVariance: 60 });
+    const [config, setConfig] = useState({ spacing: 220, xVariance: 60, yVariance: 130 });
     const { addItem } = useCart();
 
     useEffect(() => {
@@ -69,9 +69,9 @@ export function FloatingEbooks() {
             const w = window.innerWidth;
             if (w === lastWidth) return; // ignore height-only changes (iOS browser chrome on scroll)
             lastWidth = w;
-            if (w < 640) setConfig({ spacing: 60, xVariance: 10 });
-            else if (w < 1024) setConfig({ spacing: 160, xVariance: 40 });
-            else setConfig({ spacing: 220, xVariance: 60 });
+            if (w < 640) setConfig({ spacing: 60, xVariance: 10, yVariance: 50 });
+            else if (w < 1024) setConfig({ spacing: 160, xVariance: 40, yVariance: 100 });
+            else setConfig({ spacing: 220, xVariance: 60, yVariance: 130 });
         };
         update();
         window.addEventListener('resize', update);
@@ -79,7 +79,7 @@ export function FloatingEbooks() {
     }, []);
 
     const animatedItems = useMemo(() => {
-        const { spacing, xVariance } = config;
+        const { spacing, xVariance, yVariance } = config;
         return EBOOKS.map((ebook, index) => {
             const basePageX = (index - (EBOOKS.length - 1) / 2) * spacing;
             return {
@@ -91,9 +91,9 @@ export function FloatingEbooks() {
                     basePageX + (Math.random() * xVariance - xVariance / 2),
                 ],
                 yPath: [
-                    Math.random() * 300 - 150,
-                    Math.random() * 300 - 150,
-                    Math.random() * 300 - 150,
+                    Math.random() * yVariance * 2 - yVariance,
+                    Math.random() * yVariance * 2 - yVariance,
+                    Math.random() * yVariance * 2 - yVariance,
                 ],
                 rotatePath: [
                     Math.random() * 15 - 7.5,
@@ -175,14 +175,14 @@ export function FloatingEbooks() {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        className="fixed inset-0 z-[100] flex items-end md:items-center justify-center md:p-6 bg-black/40 backdrop-blur-sm"
+                        className="fixed inset-0 z-[100] flex items-end md:items-center justify-center md:p-6 bg-black/50"
                         onClick={() => setSelectedId(null)}
                     >
                         <motion.div
                             initial={{ y: '100%', opacity: 0 }}
                             animate={{ y: 0, opacity: 1 }}
                             exit={{ y: '100%', opacity: 0 }}
-                            transition={{ type: 'spring', damping: 30, stiffness: 300 }}
+                            transition={{ type: 'tween', duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
                             className="bg-white w-full md:max-w-4xl md:rounded-[40px] rounded-t-[32px] flex flex-col max-h-[88dvh] md:max-h-[85dvh] overflow-hidden shadow-2xl"
                             onClick={e => e.stopPropagation()}
                         >
