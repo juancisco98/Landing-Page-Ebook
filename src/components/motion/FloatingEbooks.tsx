@@ -12,7 +12,7 @@ const EBOOKS = [
         title: 'Importación Alemania',
         tag: 'LOGÍSTICA',
         price: '19.99',
-        image: '/importar coches.png',
+        image: '/covers/importar coches.png',
         intro: 'La guía definitiva para traer vehículos de alta gama desde Alemania sin intermediarios que se lleven tu margen.',
         chapters: ['Búsqueda en Mobile.de', 'Negociación en Alemán', 'Logística y Transporte', 'Matriculación en España']
     },
@@ -22,7 +22,7 @@ const EBOOKS = [
         title: 'Dinero con IA',
         tag: 'IA',
         price: '9.99',
-        image: '/dinero con IA.png',
+        image: '/covers/dinero con IA.png',
         intro: 'Cómo construir un ecosistema de generación de ingresos pasivos utilizando modelos de lenguaje y automatización avanzada.',
         chapters: ['Modelos de Negocio IA', 'Automatización de Servicios', 'Creación de Agentes', 'Escalado con API']
     },
@@ -32,7 +32,7 @@ const EBOOKS = [
         title: 'Dropshipping Real',
         tag: 'E-COMM',
         price: '19.99',
-        image: '/dropshipping.png',
+        image: '/covers/dropshipping.png',
         intro: 'La logística y los proveedores que los gurús ocultan. Cómo escalar un negocio de e-commerce con márgenes reales.',
         chapters: ['Selección de Ganadores', 'Proveedores Orgánicos', 'Publicidad de Alto Retorno', 'Gestión de Devoluciones']
     },
@@ -42,7 +42,7 @@ const EBOOKS = [
         title: 'Subastas Judiciales',
         tag: 'INVERSIÓN',
         price: '11.99',
-        image: '/subastas judiciales.jpeg',
+        image: '/covers/subastas judiciales.jpeg',
         intro: 'Entra en el mercado inmobiliario con un 40% de descuento. El manual para navegar el BOE sin riesgo.',
         chapters: ['Lectura de Edictos', 'Cálculo de Cargas', 'Estrategia de Puja', 'Toma de Posesión']
     },
@@ -52,7 +52,7 @@ const EBOOKS = [
         title: 'La Verdad de Ser Precoz',
         tag: 'MENTALIDAD',
         price: '9.99',
-        image: '/precoz.png',
+        image: '/covers/precoz.png',
         intro: 'Cómo reprogramar el sistema nervioso para el control total del rendimiento físico y mental.',
         chapters: ['Biología del Control', 'Protocolo de Respiración', 'Ejercicios de Piso Pélvico', 'Psicología de la Calma']
     }
