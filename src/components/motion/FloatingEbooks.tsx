@@ -136,6 +136,7 @@ export function FloatingEbooks() {
     };
 
     return (
+        <>
         <section id="e-books" className="py-8 bg-transparent min-h-[420px] md:min-h-[700px] relative flex flex-col items-center" style={{ clipPath: 'inset(0)', touchAction: 'pan-y' }}>
             <div className="relative w-full max-w-7xl h-[400px] md:h-[650px] flex items-center justify-center" style={{ touchAction: 'pan-y' }}>
                 {animatedItems.map((item, index) => (
@@ -166,8 +167,9 @@ export function FloatingEbooks() {
                     </div>
                 ))}
             </div>
+        </section>
 
-            <AnimatePresence>
+        <AnimatePresence>
                 {selectedId && selectedEbook && (
                     <motion.div
                         initial={{ opacity: 0 }}
@@ -314,6 +316,6 @@ export function FloatingEbooks() {
                     </motion.div>
                 )}
             </AnimatePresence>
-        </section>
+        </>
     );
 }
