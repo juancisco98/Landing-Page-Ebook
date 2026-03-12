@@ -64,8 +64,11 @@ export function FloatingEbooks() {
     const { addItem } = useCart();
 
     useEffect(() => {
+        let lastWidth = window.innerWidth;
         const update = () => {
             const w = window.innerWidth;
+            if (w === lastWidth) return; // ignore height-only changes (iOS browser chrome on scroll)
+            lastWidth = w;
             if (w < 640) setConfig({ spacing: 60, xVariance: 10 });
             else if (w < 1024) setConfig({ spacing: 160, xVariance: 40 });
             else setConfig({ spacing: 220, xVariance: 60 });
@@ -133,8 +136,8 @@ export function FloatingEbooks() {
     };
 
     return (
-        <section id="e-books" className="py-8 bg-transparent overflow-hidden min-h-[420px] md:min-h-[700px] relative flex flex-col items-center" style={{ overflow: 'clip' as any, touchAction: 'pan-y' }}>
-            <div className="relative w-full max-w-7xl h-[400px] md:h-[650px] flex items-center justify-center">
+        <section id="e-books" className="py-8 bg-transparent min-h-[420px] md:min-h-[700px] relative flex flex-col items-center" style={{ clipPath: 'inset(0)', touchAction: 'pan-y' }}>
+            <div className="relative w-full max-w-7xl h-[400px] md:h-[650px] flex items-center justify-center" style={{ touchAction: 'pan-y' }}>
                 {animatedItems.map((item, index) => (
                     <div
                         key={item.id}
@@ -143,11 +146,11 @@ export function FloatingEbooks() {
                             zIndex: 10 + index,
                             animation: `float-book-${index} ${item.duration}s ease-in-out infinite alternate`,
                             animationFillMode: 'both',
-                            willChange: 'transform',
+                            animationPlayState: selectedId ? 'paused' : 'running',
                             pointerEvents: 'none',
                         }}
                     >
-                        <div className="relative group cursor-pointer" style={{ pointerEvents: 'auto', touchAction: 'manipulation' }} onClick={() => setSelectedId(item.id)}>
+                        <div className="relative group cursor-pointer" style={{ pointerEvents: 'auto', touchAction: 'pan-y' }} onClick={() => setSelectedId(item.id)}>
                             <img
                                 src={item.image}
                                 alt={item.title}

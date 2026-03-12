@@ -87,6 +87,8 @@ grep -r "addItem(" src/
 - Nunca usar `overflow: hidden` en secciones que contienen animaciones si hay scroll de página → usar `overflow: clip` (no crea scroll container).
 - Los patches de pointer events SOLO sirven para animaciones interactivas (FM con onClick/whileHover), nunca para animaciones puramente visuales.
 
+**Error secundario detectado después**: El evento `resize` se dispara en iOS cuando la barra del navegador se oculta/muestra al hacer scroll (solo cambia HEIGHT). El listener sin guard `if (w === lastWidth) return` re-ejecutaba `animatedItems` con nuevos `Math.random()` y re-inyectaba keyframes, reiniciando la animación. Fix: comparar `window.innerWidth` antes/después y salir si es igual.
+
 **Patrón correcto:**
 ```tsx
 // En useEffect (después del useMemo):
