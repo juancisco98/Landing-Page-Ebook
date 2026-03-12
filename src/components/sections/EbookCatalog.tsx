@@ -161,7 +161,7 @@ function EbookCard({ ebook }: { ebook: typeof EBOOKS[0] }) {
                         ) : ebook.introImageUrl ? (
                             /* Intro image — full width, vertical scroll to read */
                             <img
-                                src={ebook.introImageUrl}
+                                src={encodeURI(ebook.introImageUrl)}
                                 alt="Introducción"
                                 className="w-full h-auto block"
                                 draggable={false}
