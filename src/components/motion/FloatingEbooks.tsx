@@ -102,6 +102,24 @@ export function FloatingEbooks() {
         });
     }, [config]);
 
+    useEffect(() => {
+        const styleId = 'floating-ebooks-styles';
+        let styleEl = document.getElementById(styleId) as HTMLStyleElement | null;
+        if (!styleEl) {
+            styleEl = document.createElement('style');
+            styleEl.id = styleId;
+            document.head.appendChild(styleEl);
+        }
+        styleEl.textContent = animatedItems.map((item, i) => `
+            @keyframes float-book-${i} {
+                0%   { transform: translate(${item.xPath[0]}px, ${item.yPath[0]}px) rotate(${item.rotatePath[0]}deg); }
+                50%  { transform: translate(${item.xPath[1]}px, ${item.yPath[1]}px) rotate(${item.rotatePath[1]}deg); }
+                100% { transform: translate(${item.xPath[2]}px, ${item.yPath[2]}px) rotate(${item.rotatePath[2]}deg); }
+            }
+        `).join('\n');
+        return () => { document.getElementById(styleId)?.remove(); };
+    }, [animatedItems]);
+
     const selectedEbook = EBOOKS.find(e => e.id === selectedId);
 
     const handleAddToCart = () => {
@@ -115,24 +133,21 @@ export function FloatingEbooks() {
     };
 
     return (
-        <section id="e-books" className="py-8 bg-transparent overflow-hidden min-h-[420px] md:min-h-[700px] relative flex flex-col items-center">
+        <section id="e-books" className="py-8 bg-transparent overflow-hidden min-h-[420px] md:min-h-[700px] relative flex flex-col items-center" style={{ overflow: 'clip' as any, touchAction: 'pan-y' }}>
             <div className="relative w-full max-w-7xl h-[400px] md:h-[650px] flex items-center justify-center">
                 {animatedItems.map((item, index) => (
-                    <motion.div
+                    <div
                         key={item.id}
                         className="absolute"
-                        style={{ zIndex: 10 + index, willChange: 'transform', pointerEvents: 'none' }}
-                        initial={{ x: item.baseX, y: 0, rotate: 0, opacity: 0 }}
-                        animate={{ x: item.xPath, y: item.yPath, rotate: item.rotatePath, opacity: 1 }}
-                        transition={{
-                            duration: item.duration,
-                            repeat: Infinity,
-                            repeatType: 'reverse',
-                            ease: "easeInOut",
-                            opacity: { duration: 1 }
+                        style={{
+                            zIndex: 10 + index,
+                            animation: `float-book-${index} ${item.duration}s ease-in-out infinite alternate`,
+                            animationFillMode: 'both',
+                            willChange: 'transform',
+                            pointerEvents: 'none',
                         }}
                     >
-                        <div className="relative group cursor-pointer" style={{ pointerEvents: 'auto' }} onClick={() => setSelectedId(item.id)}>
+                        <div className="relative group cursor-pointer" style={{ pointerEvents: 'auto', touchAction: 'manipulation' }} onClick={() => setSelectedId(item.id)}>
                             <img
                                 src={item.image}
                                 alt={item.title}
@@ -145,7 +160,7 @@ export function FloatingEbooks() {
                                 </div>
                             </div>
                         </div>
-                    </motion.div>
+                    </div>
                 ))}
             </div>
 
