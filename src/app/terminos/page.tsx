@@ -1,5 +1,12 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ChevronLeft } from 'lucide-react';
+
+export const metadata: Metadata = {
+    title: "Términos y Condiciones",
+    description: "Términos y condiciones de uso de Editor de la Verdad. Información sobre productos digitales, propiedad intelectual y uso permitido.",
+    robots: { index: false, follow: false },
+};
 
 export default function TerminosPage() {
     return (

@@ -1,5 +1,12 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ChevronLeft } from 'lucide-react';
+
+export const metadata: Metadata = {
+    title: "Política de Privacidad",
+    description: "Política de privacidad de Editor de la Verdad. Cómo tratamos tus datos personales conforme al RGPD.",
+    robots: { index: false, follow: false },
+};
 
 export default function PrivacidadPage() {
     return (
