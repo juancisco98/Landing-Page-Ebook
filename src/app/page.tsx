@@ -2,8 +2,7 @@
 
 import Hero from '@/components/sections/Hero';
 import ProductGrid from '@/components/sections/ProductGrid';
-import { Comparison } from '@/components/sections/Comparison';
-import { FloatingEbooks } from '@/components/motion/FloatingEbooks';
+import { EbookCatalog } from '@/components/sections/EbookCatalog';
 import { TestimonialsSection } from '@/components/sections/TestimonialsSection';
 import FAQ from '@/components/sections/FAQ';
 import { RequestForm } from '@/components/sections/RequestForm';
@@ -23,12 +22,7 @@ export default function Home() {
         <main className="min-h-screen bg-transparent">
             <Hero />
 
-            {/* Zero Gravity Ebooks Section */}
-            <FloatingEbooks />
-
-            <SectionDivider />
-
-            <div id="porque-elegirnos" className="scroll-mt-20"><Comparison /></div>
+            <EbookCatalog />
 
             <SectionDivider />
 

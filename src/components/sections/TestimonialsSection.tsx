@@ -13,7 +13,7 @@ const testimonials = [
     {
         text: "Importar de Alemania parecía imposible hasta que leí el e-book. El ahorro en mi primer coche fue de 4.200€. Locura.",
         image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop",
-        name: "Adrián Sanz",
+        name: "Jorge Almirón",
         role: "Trader de Coches",
     },
     {

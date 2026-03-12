@@ -41,7 +41,7 @@ export default function Hero() {
                             Ver Catálogo
                         </a>
                         <a
-                            href="#porque-elegirnos"
+                            href="#comunidad"
                             className="px-8 py-4 border border-black/10 text-black font-black text-[10px] tracking-[0.2em] uppercase rounded-2xl hover:bg-black/5 transition-all flex items-center gap-2"
                         >
                             Por qué elegirnos
