@@ -23,7 +23,7 @@ export function RequestForm() {
         const form = e.currentTarget;
         const data = new FormData(form);
         try {
-            const res = await fetch('https://formspree.io/f/FORMSPREE_ID', {
+            const res = await fetch('https://formspree.io/f/xzdjgdke', {
                 method: 'POST',
                 body: data,
                 headers: { Accept: 'application/json' },
