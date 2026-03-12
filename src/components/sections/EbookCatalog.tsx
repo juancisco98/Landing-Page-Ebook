@@ -6,6 +6,16 @@ import { useCart } from '@/hooks/useCart';
 
 const EBOOKS = [
     {
+        id: 'dropshipping',
+        variantId: '56860006809975',
+        title: 'Dropshipping Real',
+        tag: 'E-COMM',
+        price: '19.99',
+        image: '/covers/dropshipping.png',
+        introImageUrl: '/Dropshipping.jpeg',
+        chapters: ['Selección de Ganadores', 'Proveedores Orgánicos', 'Publicidad de Alto Retorno', 'Gestión de Devoluciones'],
+    },
+    {
         id: 'ale',
         variantId: '56859999633783',
         title: 'Importación Alemania',
@@ -24,16 +34,6 @@ const EBOOKS = [
         image: '/covers/dinero con IA.png',
         introImageUrl: '/Dinero con IA.jpeg',
         chapters: ['Modelos de Negocio IA', 'Automatización de Servicios', 'Creación de Agentes', 'Escalado con API'],
-    },
-    {
-        id: 'dropshipping',
-        variantId: '56860006809975',
-        title: 'Dropshipping Real',
-        tag: 'E-COMM',
-        price: '19.99',
-        image: '/covers/dropshipping.png',
-        introImageUrl: '/Dropshipping.jpeg',
-        chapters: ['Selección de Ganadores', 'Proveedores Orgánicos', 'Publicidad de Alto Retorno', 'Gestión de Devoluciones'],
     },
     {
         id: 'sub',
