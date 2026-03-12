@@ -1,7 +1,6 @@
 'use client';
 
 import Hero from '@/components/sections/Hero';
-import ProductGrid from '@/components/sections/ProductGrid';
 import { EbookCatalog } from '@/components/sections/EbookCatalog';
 import { TestimonialsSection } from '@/components/sections/TestimonialsSection';
 import FAQ from '@/components/sections/FAQ';
@@ -37,10 +36,6 @@ export default function Home() {
 
             <div id="contacto" className="scroll-mt-20"><RequestForm /></div>
 
-            <SectionDivider />
-
-            <div id="ebooks" className="scroll-mt-20"><ProductGrid /></div>
-
             {/* Final CTA / Footer */}
             <footer className="py-16 md:py-32 px-4 md:px-6 border-t border-black/5 bg-transparent text-center mb-16 md:mb-0">
                 <div className="max-w-3xl mx-auto">
@@ -55,8 +50,8 @@ export default function Home() {
                     <div className="pt-10 md:pt-20 border-t border-black/5 flex flex-col md:flex-row justify-between items-center gap-4 md:gap-8">
                         <p className="text-gray-400 font-black text-[10px] tracking-widest uppercase">Editor de la Verdad © 2026</p>
                         <div className="flex gap-6 md:gap-12 text-gray-400 text-[10px] font-black tracking-widest uppercase">
-                            <span className="hover:text-black cursor-pointer">Términos</span>
-                            <span className="hover:text-black cursor-pointer">Privacidad</span>
+                            <a href="/terminos" className="hover:text-black cursor-pointer transition-colors">Términos</a>
+                            <a href="/privacidad" className="hover:text-black cursor-pointer transition-colors">Privacidad</a>
                             <a href="#contacto" className="hover:text-black cursor-pointer transition-colors">Contacto</a>
                         </div>
                     </div>

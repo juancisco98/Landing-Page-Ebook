@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { useCart } from '@/hooks/useCart';
-import { ShoppingBag, BookOpen, Star, Users, HelpCircle } from 'lucide-react';
+import { ShoppingBag, BookOpen, Star, Users, HelpCircle, Send } from 'lucide-react';
 import Link from 'next/link';
 import { NavBar } from '@/components/ui/tubelight-navbar';
 
@@ -11,6 +11,7 @@ const navItems = [
     { name: 'Por qué elegirnos', url: '#porque-elegirnos', icon: Star },
     { name: 'Comunidad', url: '#comunidad', icon: Users },
     { name: 'Preguntas Frecuentes', url: '#faq', icon: HelpCircle },
+    { name: 'Sugerir Ebook', url: '#contacto', icon: Send },
 ];
 
 export function Navbar() {

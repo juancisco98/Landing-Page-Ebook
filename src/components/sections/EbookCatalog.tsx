@@ -157,7 +157,6 @@ function EbookCard({ ebook }: { ebook: typeof EBOOKS[0] }) {
                     ref={backRef}
                     className="absolute inset-0 rounded-[24px] overflow-hidden bg-white flex flex-col"
                     style={{ backfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}
-                    onClick={e => e.stopPropagation()}
                 >
                     {/* Header */}
                     <div className="flex items-center justify-between px-4 pt-4 pb-3 border-b border-black/5 shrink-0">
@@ -222,9 +221,9 @@ function EbookCard({ ebook }: { ebook: typeof EBOOKS[0] }) {
                                 <ChevronRight className="w-4 h-4" />
                             </button>
                         </div>
-                        <button onClick={handleAddToCart} className="w-full py-3 bg-black text-white font-black tracking-widest uppercase rounded-xl hover:bg-blue-600 active:bg-blue-700 transition-all flex items-center justify-center gap-2 text-[9px] mb-2">
-                            <ShoppingCart className="w-3.5 h-3.5" />
-                            Añadir — €{ebook.price}
+                        <button onClick={handleAddToCart} className="w-full py-4 bg-black text-white font-black tracking-widest uppercase rounded-xl hover:bg-blue-600 active:bg-blue-700 transition-all flex items-center justify-center gap-2 text-xs mb-2">
+                            <ShoppingCart className="w-4 h-4" />
+                            Añadir al carrito — €{ebook.price}
                         </button>
                     </div>
                 </div>
