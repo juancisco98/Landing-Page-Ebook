@@ -6,6 +6,7 @@ import { Comparison } from '@/components/sections/Comparison';
 import { FloatingEbooks } from '@/components/motion/FloatingEbooks';
 import { TestimonialsSection } from '@/components/sections/TestimonialsSection';
 import FAQ from '@/components/sections/FAQ';
+import { RequestForm } from '@/components/sections/RequestForm';
 
 function SectionDivider() {
     return (
@@ -40,13 +41,17 @@ export default function Home() {
 
             <SectionDivider />
 
-            <div id="ebooks"><ProductGrid /></div>
+            <div id="contacto" className="scroll-mt-20"><RequestForm /></div>
+
+            <SectionDivider />
+
+            <div id="ebooks" className="scroll-mt-20"><ProductGrid /></div>
 
             {/* Final CTA / Footer */}
             <footer className="py-16 md:py-32 px-4 md:px-6 border-t border-black/5 bg-transparent text-center mb-16 md:mb-0">
                 <div className="max-w-3xl mx-auto">
                     <span className="text-blue-500 font-black tracking-[0.3em] text-[10px] uppercase mb-8 block">Inversión Inteligente</span>
-                    <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-black tracking-tighter mb-8 md:mb-12 text-black leading-tight md:leading-[0.9]">
+                    <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-black tracking-tighter mb-8 md:mb-12 text-black leading-snug md:leading-[0.95]">
                         LA VERDAD NO ES <span className="text-blue-500 italic">CARA</span>,<br />
                         EL ENGAÑO SÍ.
                     </h2>
@@ -58,7 +63,7 @@ export default function Home() {
                         <div className="flex gap-6 md:gap-12 text-gray-400 text-[10px] font-black tracking-widest uppercase">
                             <span className="hover:text-black cursor-pointer">Términos</span>
                             <span className="hover:text-black cursor-pointer">Privacidad</span>
-                            <span className="hover:text-black cursor-pointer">Contacto</span>
+                            <a href="#contacto" className="hover:text-black cursor-pointer transition-colors">Contacto</a>
                         </div>
                     </div>
                 </div>

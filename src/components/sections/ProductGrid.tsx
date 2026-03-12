@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { useCart } from '@/hooks/useCart';
-import { ShoppingCart, ArrowRight } from 'lucide-react';
+import { ShoppingCart } from 'lucide-react';
 
 const EBOOKS = [
     {
@@ -51,12 +51,12 @@ export default function ProductGrid() {
     const { addItem } = useCart();
 
     return (
-        <section id="products" className="py-16 md:py-32 bg-transparent">
+        <section className="py-16 md:py-32 bg-transparent">
             <div className="container mx-auto px-4 md:px-6">
                 <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 md:mb-20 gap-6 md:gap-8">
                     <div>
                         <span className="text-blue-500 font-black tracking-[0.3em] text-[10px] uppercase mb-6 block">Catálogo Exclusivo</span>
-                        <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-black tracking-tighter text-black uppercase leading-tight md:leading-[0.9] lg:whitespace-nowrap">
+                        <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-black tracking-tighter text-black uppercase leading-snug md:leading-[0.95] lg:whitespace-nowrap">
                             NUESTRO <span className="text-blue-500 italic">CATÁLOGO</span>
                         </h2>
                     </div>
@@ -105,7 +105,7 @@ export default function ProductGrid() {
                             </div>
 
                             <div className="px-4">
-                                <h3 className="text-2xl font-black tracking-tighter mb-4 leading-none uppercase text-black">
+                                <h3 className="text-2xl font-black tracking-tighter mb-4 leading-tight uppercase text-black">
                                     {ebook.title}
                                 </h3>
                                 <p className="text-gray-500 text-sm font-medium leading-relaxed mb-6 line-clamp-2">
@@ -121,13 +121,6 @@ export default function ProductGrid() {
                                     Añadir al Carrito
                                 </button>
 
-                                <button
-                                    onClick={() => addItem(ebook.id, 1, { title: ebook.title, price: ebook.price, image: ebook.image })}
-                                    className="flex items-center gap-2 text-[10px] font-black tracking-widest uppercase text-blue-500 group/link"
-                                >
-                                    Añadir al Carrito
-                                    <ArrowRight className="w-3 h-3 transform group-hover/link:translate-x-1 transition-transform" />
-                                </button>
                             </div>
                         </motion.div>
                     ))}

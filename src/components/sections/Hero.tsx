@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { ShoppingCart, ChevronRight } from 'lucide-react';
 
 export default function Hero() {
     return (
@@ -30,6 +31,23 @@ export default function Hero() {
                     <p className="text-base md:text-xl lg:text-2xl text-gray-500 max-w-2xl mx-auto font-medium leading-relaxed">
                         Guías directas que desmontan los mitos sobre dinero, negocios y éxito.
                     </p>
+
+                    <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-10">
+                        <a
+                            href="#ebooks"
+                            className="px-8 py-4 bg-black text-white font-black text-[10px] tracking-[0.2em] uppercase rounded-2xl hover:bg-blue-600 transition-all shadow-xl shadow-black/10 flex items-center gap-3"
+                        >
+                            <ShoppingCart className="w-4 h-4" />
+                            Ver Catálogo
+                        </a>
+                        <a
+                            href="#porque-elegirnos"
+                            className="px-8 py-4 border border-black/10 text-black font-black text-[10px] tracking-[0.2em] uppercase rounded-2xl hover:bg-black/5 transition-all flex items-center gap-2"
+                        >
+                            Por qué elegirnos
+                            <ChevronRight className="w-3 h-3" />
+                        </a>
+                    </div>
                 </motion.div>
             </div>
         </section>

@@ -76,7 +76,7 @@ export function TestimonialsSection() {
                     className="flex flex-col items-center justify-center max-w-[540px] mx-auto text-center mb-12 md:mb-20"
                 >
                     <span className="text-blue-500 font-bold tracking-[0.3em] text-[10px] uppercase mb-6">Social Proof</span>
-                    <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-black tracking-tighter text-black uppercase leading-tight md:leading-[0.9]">
+                    <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-black tracking-tighter text-black uppercase leading-snug md:leading-[0.95]">
                         LO QUE DICE <br /><span className="text-blue-500 italic">NUESTRA GENTE</span>
                     </h2>
                     <p className="mt-6 md:mt-8 text-gray-500 font-medium text-base md:text-lg leading-relaxed">

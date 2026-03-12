@@ -43,7 +43,7 @@ body {
   }
 
   .text-massive {
-    @apply text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter leading-[0.95] md:leading-[0.85];
+    @apply text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter leading-[1.0] md:leading-[0.92];
   }
 }
 

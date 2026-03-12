@@ -16,7 +16,7 @@ export function Comparison() {
             <div className="container mx-auto px-4 md:px-6">
                 <div className="text-center mb-12 md:mb-20">
                     <span className="text-blue-500 font-bold tracking-widest text-[10px] uppercase mb-4 block">VS MENTORÍAS</span>
-                    <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-black tracking-tighter text-black uppercase leading-tight">
+                    <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-black tracking-tighter text-black uppercase leading-snug md:leading-[0.95]">
                         ¿POR QUÉ <span className="text-blue-500 italic">ELEGIRNOS</span>?
                     </h2>
                 </div>
